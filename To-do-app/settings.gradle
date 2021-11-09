@@ -1,3 +1,0 @@
-settings.gradle
-include 'To-do-app'
-rootProject.name = 'To-do-app'
