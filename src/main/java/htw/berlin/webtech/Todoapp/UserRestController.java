@@ -1,7 +1,7 @@
 package htw.berlin.webtech.Todoapp;
 
 import htw.berlin.webtech.Todoapp.api.User;
-import htw.berlin.webtech.Todoapp.api.UserCreateRequest;
+import htw.berlin.webtech.Todoapp.api.UserCreateOrUpdateRequest;
 import htw.berlin.webtech.Todoapp.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -31,11 +31,16 @@ public class UserRestController {
     }
 
 
-
     @PostMapping(path = "api/v1/users")
-    public ResponseEntity<Void> createUser(@RequestBody UserCreateRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createUser(@RequestBody UserCreateOrUpdateRequest request) throws URISyntaxException {
        var user = userService.create(request);
        URI uri = new URI("api/v1/users" + user.getId() );
        return ResponseEntity.created(uri).build();
+    }
+
+    @PostMapping(path = "/api/v1/users/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserCreateOrUpdateRequest request){
+        var user = userService.update(id, request);
+        return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
 }

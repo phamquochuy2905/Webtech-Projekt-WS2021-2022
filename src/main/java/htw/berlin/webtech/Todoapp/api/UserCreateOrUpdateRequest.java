@@ -1,6 +1,6 @@
 package htw.berlin.webtech.Todoapp.api;
 
-public class UserCreateRequest {
+public class UserCreateOrUpdateRequest {
 
     private long id;
     private String firstname;
@@ -8,7 +8,7 @@ public class UserCreateRequest {
     private String email;
     private String password;
 
-    public UserCreateRequest(long id, String firstname, String lastname, String email, String password) {
+    public UserCreateOrUpdateRequest(long id, String firstname, String lastname, String email, String password) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

@@ -1,7 +1,7 @@
 package htw.berlin.webtech.Todoapp.service;
 
 import htw.berlin.webtech.Todoapp.api.User;
-import htw.berlin.webtech.Todoapp.api.UserCreateRequest;
+import htw.berlin.webtech.Todoapp.api.UserCreateOrUpdateRequest;
 import htw.berlin.webtech.Todoapp.persistence.UserEntity;
 import htw.berlin.webtech.Todoapp.persistence.UserRepository;
 import org.springframework.stereotype.Service;
@@ -29,12 +29,28 @@ public class UserService {
         return userEntity.map(this::transformEntity).orElse(null);
     }
 
-    public User create(UserCreateRequest request) {
+    public User create(UserCreateOrUpdateRequest request) {
         var userEntity = new UserEntity(request.getFirstname(), request.getLastname(),
                 request.getEmail(), request.getPassword());
         userEntity = userRepository.save(userEntity);
         return transformEntity(userEntity);
 
+    }
+
+    public User update(Long id, UserCreateOrUpdateRequest request) {
+        var userEntityOptional = userRepository.findById(id);
+        if (userEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var userEntity = userEntityOptional.get();
+        userEntity.setFirstname(request.getFirstname());
+        userEntity.setLastname(request.getLastname());
+        userEntity.setEmail(request.getEmail());
+        userEntity.setPassword(request.getPassword());
+
+        userEntity = userRepository.save(userEntity);
+        return transformEntity(userEntity);
     }
 
     private User transformEntity(UserEntity userEntity) {
