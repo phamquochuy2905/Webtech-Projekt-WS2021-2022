@@ -43,4 +43,10 @@ public class UserRestController {
         var user = userService.update(id, request);
         return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
     }
+
+    @DeleteMapping(path = "/api/v1/users/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+       boolean successful = userService.deleteById(id);
+       return successful ? ResponseEntity.ok().build() : ResponseEntity.notFound().build();
+    }
 }
