@@ -1,15 +1,13 @@
 package htw.berlin.webtech.Todoapp;
 
 import htw.berlin.webtech.Todoapp.api.User;
-import htw.berlin.webtech.Todoapp.persistence.UserRepository;
+import htw.berlin.webtech.Todoapp.api.UserCreateRequest;
 import htw.berlin.webtech.Todoapp.service.UserService;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
@@ -24,5 +22,20 @@ public class UserRestController {
     @GetMapping(path = "/api/v1/users" )
     public ResponseEntity<List<User>> fetchUser() {
       return ResponseEntity.ok(userService.findAll());
+    }
+
+    @GetMapping(path = "/api/v1/users/{id}")
+    public ResponseEntity<User> fetchUserById(@PathVariable Long id) {
+       var user = userService.findById(id);
+       return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
+    }
+
+
+
+    @PostMapping(path = "api/v1/users")
+    public ResponseEntity<Void> createUser(@RequestBody UserCreateRequest request) throws URISyntaxException {
+       var user = userService.create(request);
+       URI uri = new URI("api/v1/users" + user.getId() );
+       return ResponseEntity.created(uri).build();
     }
 }

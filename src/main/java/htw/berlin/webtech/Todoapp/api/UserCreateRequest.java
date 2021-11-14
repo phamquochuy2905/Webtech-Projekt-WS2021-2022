@@ -1,43 +1,27 @@
-package htw.berlin.webtech.Todoapp.persistence;
+package htw.berlin.webtech.Todoapp.api;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+public class UserCreateRequest {
 
-@Entity (name = "users")
-public class UserEntity {
-
-    @Id
-    @GeneratedValue
-    @Column(name = "id")
     private long id;
-
-    @Column(name = "firstname")
     private String firstname;
-
-    @Column(name = "lastname")
     private String lastname;
-
-    @Column(name = "email")
     private String email;
-
-    @Column(name = "password")
     private String password;
 
-    public UserEntity(String firstname, String lastname, String email, String password) {
+    public UserCreateRequest(long id, String firstname, String lastname, String email, String password) {
+        this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
     }
 
-    protected UserEntity() {
-
-    }
-
     public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstname() {
