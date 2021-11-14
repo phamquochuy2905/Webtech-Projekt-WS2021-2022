@@ -38,7 +38,7 @@ public class UserRestController {
        return ResponseEntity.created(uri).build();
     }
 
-    @PostMapping(path = "/api/v1/users/{id}")
+    @PutMapping(path = "/api/v1/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody UserCreateOrUpdateRequest request){
         var user = userService.update(id, request);
         return user != null? ResponseEntity.ok(user) : ResponseEntity.notFound().build();
