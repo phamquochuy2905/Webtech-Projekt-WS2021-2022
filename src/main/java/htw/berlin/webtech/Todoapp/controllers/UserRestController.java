@@ -1,4 +1,4 @@
-package htw.berlin.webtech.Todoapp;
+package htw.berlin.webtech.Todoapp.controllers;
 
 import htw.berlin.webtech.Todoapp.api.User;
 import htw.berlin.webtech.Todoapp.api.UserCreateOrUpdateRequest;
