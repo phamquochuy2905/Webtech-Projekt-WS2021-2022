@@ -12,7 +12,7 @@ public class ToDoListEntity {
     @Id
     @GeneratedValue
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(name = "task")
     private String title;
@@ -21,19 +21,19 @@ public class ToDoListEntity {
     private LocalDate deadline;
 
     @Column(name = "completion status")
-    private boolean isCompleted;
+    private boolean completed;
 
     public ToDoListEntity(String title, LocalDate deadline, boolean isCompleted) {
         this.title = title;
         this.deadline = deadline;
-        this.isCompleted = isCompleted;
+        this.completed = isCompleted;
     }
 
-    public ToDoListEntity() {
+    protected ToDoListEntity() {
 
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
@@ -41,7 +41,7 @@ public class ToDoListEntity {
         return title;
     }
 
-    public void setTitle(String toDoThing) {
+    public void setTitle(String title) {
         this.title = title;
     }
 
@@ -54,10 +54,10 @@ public class ToDoListEntity {
     }
 
     public boolean isCompleted() {
-        return isCompleted;
+        return completed;
     }
 
     public void setCompleted(boolean completed) {
-        this.isCompleted = isCompleted;
+        this.completed = completed;
     }
 }

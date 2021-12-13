@@ -1,13 +1,13 @@
 package htw.berlin.webtech.Todoapp.service;
 
+import htw.berlin.webtech.Todoapp.api.ToDoCreateOrUpdateRequest;
 import htw.berlin.webtech.Todoapp.api.ToDoList;
 import htw.berlin.webtech.Todoapp.persistence.ToDoListEntity;
 import htw.berlin.webtech.Todoapp.persistence.ToDoListRepository;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -19,20 +19,39 @@ public class ToDoListService {
         this.toDoListRepository = toDoListRepository;
     }
 
-    public List<ToDoListEntity> findAll(String user) {
+    public List<ToDoList> findAll() {
 
-        var toDoThings = new ArrayList<ToDoListEntity>();
-        var iterator = toDoListRepository.findAll();
-        for(ToDoListEntity a : iterator) {
-            
-        }
-
-        return toDoThings;
+        List<ToDoListEntity> toDos = toDoListRepository.findAll();
+        return toDos.stream().map(this::transformEntity).collect(Collectors.toList());
     }
 
-    public void add(String toDoThing, LocalDate deadline, boolean isCompleted) {
-        ToDoListEntity newToDo = new ToDoListEntity(toDoThing, deadline, isCompleted);
-        toDoListRepository.save(newToDo);
+    public ToDoList findById(Long id) {
+        var todoEntity = toDoListRepository.findById(id);
+        return todoEntity.map(this::transformEntity).orElse(null);
+    }
+
+    public ToDoList create(ToDoCreateOrUpdateRequest request) {
+        var todoEntity = new ToDoListEntity(request.getTitle(), request.getDeadline(),
+                request.isCompleted());
+        todoEntity = toDoListRepository.save(todoEntity);
+        return transformEntity(todoEntity);
+
+    }
+
+    public ToDoList update(Long id, ToDoCreateOrUpdateRequest request) {
+        var todoEntityOptional = toDoListRepository.findById(id);
+        if (todoEntityOptional.isEmpty()){
+            return null;
+        }
+
+        var todoEntity =todoEntityOptional.get();
+        todoEntity.setTitle(request.getTitle());
+        todoEntity.setDeadline(request.getDeadline());
+        todoEntity.setCompleted(request.isCompleted());
+
+
+        todoEntity = toDoListRepository.save(todoEntity);
+        return transformEntity(todoEntity);
     }
 
     public boolean deleteById(Long id) {
@@ -50,5 +69,13 @@ public class ToDoListService {
     public ToDoListEntity save(ToDoListEntity toDoListEntity) {
         toDoListRepository.save(toDoListEntity);
         return toDoListEntity;
+    }
+
+    private ToDoList transformEntity(ToDoListEntity todoEntity) {
+        return new ToDoList(
+                todoEntity.getId(),
+                todoEntity.getTitle(),
+                todoEntity.getDeadline(),
+                todoEntity.isCompleted() );
     }
 }

@@ -2,22 +2,26 @@ package htw.berlin.webtech.Todoapp.api;
 
 import java.time.LocalDate;
 
-public class ToDoList {
+public class ToDoCreateOrUpdateRequest {
 
-    private Long id;
+    private long id;
     private String title;
     private LocalDate deadline;
     private boolean completed;
 
-    public ToDoList(long id, String title, LocalDate deadline, boolean completed) {
+    public ToDoCreateOrUpdateRequest(long id, String title, LocalDate deadline, boolean completed) {
         this.id = id;
         this.title = title;
         this.deadline = deadline;
         this.completed = completed;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getTitle() {
