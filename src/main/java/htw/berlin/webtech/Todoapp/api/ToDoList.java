@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class ToDoList {
 
-    private Long id;
+    private long id;
     private String title;
     private LocalDate deadline;
     private boolean completed;

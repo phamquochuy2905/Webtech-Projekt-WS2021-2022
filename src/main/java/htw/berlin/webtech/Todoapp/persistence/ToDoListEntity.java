@@ -6,7 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.time.LocalDate;
 
-@Entity (name = "toDoList")
+@Entity (name = "toDos")
 public class ToDoListEntity {
 
     @Id
@@ -14,19 +14,19 @@ public class ToDoListEntity {
     @Column(name = "id")
     private long id;
 
-    @Column(name = "task")
+    @Column(name = "title")
     private String title;
 
     @Column(name ="deadline")
     private LocalDate deadline;
 
-    @Column(name = "completion status")
+    @Column(name = "completed")
     private boolean completed;
 
-    public ToDoListEntity(String title, LocalDate deadline, boolean isCompleted) {
+    public ToDoListEntity(String title, LocalDate deadline, boolean completed) {
         this.title = title;
         this.deadline = deadline;
-        this.completed = isCompleted;
+        this.completed = completed;
     }
 
     protected ToDoListEntity() {
