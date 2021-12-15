@@ -1,11 +1,9 @@
 package htw.berlin.webtech.Todoapp.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Entity (name = "users")
+@Entity
+@Table(name = "users")
 public class User {
 
     @Id

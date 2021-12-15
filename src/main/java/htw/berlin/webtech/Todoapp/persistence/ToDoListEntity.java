@@ -1,12 +1,10 @@
 package htw.berlin.webtech.Todoapp.persistence;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
-@Entity (name = "toDos")
+@Entity
+@Table(name = "toDos")
 public class ToDoListEntity {
 
     @Id
