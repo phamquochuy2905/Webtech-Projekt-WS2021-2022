@@ -11,11 +11,11 @@ import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
-public class ToDoController {
+public class ToDoRestController {
 
     private final ToDoListService todoService;
 
-    public ToDoController(ToDoListService todoService) {
+    public ToDoRestController(ToDoListService todoService) {
         this.todoService = todoService;
     }
 
