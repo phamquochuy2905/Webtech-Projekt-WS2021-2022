@@ -6,33 +6,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity (name = "users")
-public class UserEntity {
+public class User {
 
     @Id
     @GeneratedValue
     @Column(name = "id")
     private long id;
 
-    @Column(name = "firstname")
+    @Column(nullable = false, name = "firstname")
     private String firstname;
 
-    @Column(name = "lastname")
+    @Column(nullable = false, name = "lastname")
     private String lastname;
 
-    @Column(name = "email")
+    @Column(nullable = false, unique = true, name = "email")
     private String email;
 
-    @Column(name = "password")
+    @Column(nullable = false, name = "password")
     private String password;
 
-    public UserEntity(String firstname, String lastname, String email, String password) {
+    public User(String firstname, String lastname, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
     }
 
-    protected UserEntity() {
+    public User() {
 
     }
 
