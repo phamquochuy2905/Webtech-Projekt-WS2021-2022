@@ -15,7 +15,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .allowedMethods("*")
                 .allowedOrigins(
                         "http://localhost:5000",
-                        "https://spring-boot-to-do-app-frontend.herokuapp.com/"
+                        "https://spring-boot-to-do-app-frontend.herokuapp.com"
                 );
     }
 }
