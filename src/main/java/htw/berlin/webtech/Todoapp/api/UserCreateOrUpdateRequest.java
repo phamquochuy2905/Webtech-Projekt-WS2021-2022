@@ -16,6 +16,8 @@ public class UserCreateOrUpdateRequest {
         this.password = password;
     }
 
+    public UserCreateOrUpdateRequest() {}
+
     public long getId() {
         return id;
     }

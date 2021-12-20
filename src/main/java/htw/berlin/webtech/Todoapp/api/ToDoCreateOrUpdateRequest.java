@@ -16,6 +16,8 @@ public class ToDoCreateOrUpdateRequest {
         this.completed = completed;
     }
 
+    public ToDoCreateOrUpdateRequest() {}
+
     public long getId() {
         return id;
     }
