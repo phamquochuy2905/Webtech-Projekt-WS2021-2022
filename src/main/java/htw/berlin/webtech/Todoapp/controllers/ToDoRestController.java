@@ -4,13 +4,16 @@ import htw.berlin.webtech.Todoapp.api.ToDoCreateOrUpdateRequest;
 import htw.berlin.webtech.Todoapp.api.ToDoList;
 import htw.berlin.webtech.Todoapp.service.ToDoListService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
 
 @RestController
+@Validated
 public class ToDoRestController {
 
     private final ToDoListService todoService;
@@ -32,7 +35,7 @@ public class ToDoRestController {
 
 
     @PostMapping(path = "api/v1/todos")
-    public ResponseEntity<Void> createTodo(@RequestBody ToDoCreateOrUpdateRequest request) throws URISyntaxException {
+    public ResponseEntity<Void> createTodo(@Valid @RequestBody ToDoCreateOrUpdateRequest request) throws URISyntaxException {
         var todo = todoService.create(request);
         URI uri = new URI("api/v1/todos" + todo.getId() );
         return ResponseEntity

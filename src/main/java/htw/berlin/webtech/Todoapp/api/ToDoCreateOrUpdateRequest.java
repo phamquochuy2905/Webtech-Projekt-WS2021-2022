@@ -1,10 +1,12 @@
 package htw.berlin.webtech.Todoapp.api;
 
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 
 public class ToDoCreateOrUpdateRequest {
 
     private long id;
+    @Size(min = 3, message = "Provide a title with 3 characters or more.")
     private String title;
     private LocalDate deadline;
     private boolean completed;
